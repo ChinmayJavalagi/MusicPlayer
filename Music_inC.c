@@ -3,28 +3,17 @@
 #include<stdlib.h>
 #define size 11
 
-
-
-
-// void hash(char phone, char pass[20]){
-    
-// }
-
-
-
-
-
-
-
-
-
-
-
 struct node
 {
     char data[20];
     struct node *next;
 };
+
+typedef struct mobile
+{
+    long long int phone;
+    struct node *next1;
+}*node1;
 
 struct node *chain[size];
 
@@ -35,16 +24,19 @@ void init()
         chain[i] = NULL;
 }
 
-void insert(long long int value)
+void signup()
 {
     //create a newnode with value
+    long long int phone;
     struct node *newNode = malloc(sizeof(struct node));
-    
+    printf("Phone number ");
+    scanf("%lld",&phone);
+    printf("Password: ");
     scanf("%s",newNode->data);
     newNode->next = NULL;
 
     //calculate hash key
-    int key = value % size;
+    int key = phone % size;
 
     //check if chain[key] is empty
     if(chain[key] == NULL)
@@ -61,6 +53,7 @@ void insert(long long int value)
 
         temp->next = newNode;
     }
+    printf("Sign up complete!");
 }
 
 void print()
@@ -81,9 +74,51 @@ void print()
 }
 
 
+void hash(long long int phone, char pass[20]){
+    int key;
+    key = phone % size;
+    struct node *cur =  chain[key]; 
+    while(cur!=NULL){
+        if(strcmp(cur->data,pass)==0){
+            printf("Logged in\n");
+            break;
+        }
+        else{
+            cur = cur->next;
+        }
+    }
+}
+
 void login(){
     
+    long long int phone;
+    char password[20];
+
+    printf("Phone number ");
+    scanf("%lld",&phone);
+    printf("Password: ");
+    scanf("%s",password);
+    hash(phone,password);
+
 }
+
+
+node1 create_node()
+{
+    node1 temp;
+    int n;
+    temp=(node1)malloc(sizeof(struct mobile));
+    printf("Phone number:");
+    scanf("%lld",&temp->phone);
+    temp->next1=NULL;
+}
+
+
+void append(){
+    create_node();    
+}
+
+
 
 
 int main()
@@ -104,5 +139,28 @@ int main()
 
     print();
 
+    login();
     return 0;
 }
+
+// int main(){
+//     long long int phone;
+//     char password[20];
+//     int key;
+
+//     // printf("Phone number ");
+//     // scanf("%lld",&phone);
+//     // printf("Password: ");
+//     // scanf("%s",password);
+
+    
+//     // printf("%lld\n%s",phone,password);
+//     // while(1){
+//     //     scanf("%lld",&phone);
+//     //     key = phone % 11;
+//     //     printf("%d",key);
+//     // }
+//     // init();
+    
+//     // return 0;
+// }

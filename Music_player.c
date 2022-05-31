@@ -1,14 +1,20 @@
-#include<stdio.h>
-#include<stdlib.h>
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "temp.h"
 typedef struct num
 {
     int data;
     struct num *next;
     struct num *prev;
 
-}*node;
-node create_node()
+} * node;
+typedef struct mobile
+{
+    long long int phone;
+    struct node1 *next1;
+} * node1;
+/*node create_node()
 {
     node temp;int n;
     temp=(node)malloc(sizeof(struct num));
@@ -16,10 +22,16 @@ node create_node()
     scanf("%d",&temp->data);
     temp->next=NULL;
     temp->prev=NULL;
-
+}*/
+node1 create_node1(long long int phone)
+{
+    node1 temp1;
+    temp1 = (node1)malloc(sizeof(struct mobile));
+    temp1->phone = phone;
+    temp1->next1 = NULL;
 }
 
-node insert_end(node temp,node head)
+/*node insert_end(node temp,node head)
 {
     node cur=head;
     if(head==NULL)
@@ -33,8 +45,8 @@ node insert_end(node temp,node head)
     cur->next=temp;
     temp->prev=cur;
     return head;
-}
-void display(node head)
+}*/
+/*void display(node head)
 {
     node cur=head;
     if(head==NULL)
@@ -47,24 +59,9 @@ void display(node head)
         printf("%d ",cur->data);
         cur=cur->next;
     }
-}
-node insert_pos(node temp,node head)
-{
-    int pos,i=1;node cur=head,pre=head;
-    printf("enter the position:");
-    scanf("%d",&pos);
-    while(i<pos)
-    {
-        cur=cur->next;
-        i++;
-    }
-    pre=cur->prev;
-    pre->next=temp;
-    temp->next=cur;
-    return head;
-}
+}*/
 
-node delete_ele(node head)
+/*node delete_ele(node head)
 {
     int n,flag=0;node pre,cur=head;;
     if(head==NULL)
@@ -116,38 +113,70 @@ node delete_ele(node head)
     if(flag==0)
         printf("Invalid no\n");
 
+}*/
+node1 insert_beg(node1 temp1, node1 head1)
+{
+    if (head1 == NULL)
+    {
+        return temp1;
+    }
+    temp1->next1 = head1;
+
+    head1 = temp1;
+    return head1;
 }
+void find_phone(long long int phone, node1 head1)
+{
 
+    node1 cur = head1, temp1;
 
-void user(){
+    while (cur != NULL)
+    {
+        if (cur->phone == phone)
+        {
+            login(phone);
+            break;
+        }
+        cur = cur->next1;
+    }
+    if (cur == NULL)
+    {
+        printf("Please sign up\n");
+        temp1 = create_node1(phone);
+        head1 = insert_beg(temp1, head1);
+        signup(phone);
+    }
+}
+void user(node1 head1)
+{
+    long long int phone;
     int opt;
-    printf("1.SignUp    2.Login");
-    scanf("%d",&opt);
+    node1 temp1;
+    printf("1.Sign up\n2.Login");
+    scanf("%d", &opt);
     switch (opt)
     {
-    case 1: signup();
+    case 1:
+        printf("Phone number ");
+        scanf("%lld", &phone);
+        temp1 = create_node1(phone);
+        head1 = insert_beg(temp1, head1);
+        signup(phone);
         break;
-    case 2: if(login()==False){
-        
-    }
-        break;
-    default:
+    case 2:
+        printf("Phone number ");
+        scanf("%lld", &phone);
+        find_phone(phone, head1);
         break;
     }
 }
-
-
 void main()
 {
-    node temp,head=NULL;int ch;int n,x;char name[20];
-    printf("Enter the name of the playlist:\n");
-    scanf("%s",&name);
-    node headm[n];
-    node head=NULL;
-    temp=create_node();
-    headm[0]=insert_end(temp,head);
-    
-    while(1)
+    // node temp,head=NULL;int ch;int n,x;char name[20];
+    node1 head1 = NULL;
+    init();      // initializing chain to NULL
+    user(head1); // Signup or login
+    /*while(1)
     {
         printf(" 1.Add a new song\n 2.delete song\n 3.display the entire playlist\n 4.Total songs\n 5.search song\n 6.recently played track\n 7.sorted playlist\n 8.create a new playlist");
         scanf("%d",&ch);
@@ -187,6 +216,6 @@ void main()
             default: exit(0);
 
         }
-    }
+    }*/
 
 }

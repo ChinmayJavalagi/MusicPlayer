@@ -44,7 +44,7 @@ void signup(long long int phone)
 
         temp->next = newNode;
     }
-    printf("Sign up completed");
+    printf("Sign up completed\n\n");
 }
 void hash(long long int phone, char password[20])
 {
@@ -55,7 +55,7 @@ void hash(long long int phone, char password[20])
     {
         if (strcmp(cur->data, password) == 0)
         {
-            printf("logged In");
+            printf("logged In\n");
             break;
         }
         else
@@ -68,8 +68,6 @@ void login(long long int phone)
 {
 
     char password[20];
-    printf("Phone number ");
-    scanf("%lld", &phone);
     printf("Password: ");
     scanf("%s", password);
     hash(phone, password);

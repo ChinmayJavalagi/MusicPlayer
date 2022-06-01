@@ -1,5 +1,5 @@
 # MusicPlayer
-## This is the Music Player Repository for DSA course project 4th sem 2022
+### This is the Music Player Repository for DSA course project 4th sem 2022
 
 # Problem statement-
    A music player application to be implemented using various data structures. The application includes doubly linked list,stacks and hashing to hash the user password which is used for login/signup of the application.
@@ -21,6 +21,8 @@
 This has been implemented using hashing.Here the value is the user's phone number from which the key is being calculated with appropriate hash funtion.
  And the user's password is stored in the key. Collision is been handled by chaining.
 ## Hash function-
- Key=value % size of hash table
+ Key=value % size of hash table<br/>
+   where value is user's phone number
+   
 
 

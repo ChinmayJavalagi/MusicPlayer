@@ -48,7 +48,7 @@ void signup(long long int phone)
 }
 void hash(long long int phone, char password[20])
 {
-    int key;
+    int key,flag = 0;
     key = phone % size;
     struct node *cur = chain[key];
     while (cur != NULL)
@@ -56,12 +56,17 @@ void hash(long long int phone, char password[20])
         if (strcmp(cur->data, password) == 0)
         {
             printf("logged In\n");
+            flag =1;
             break;
         }
         else
         {
             cur = cur->next;
         }
+    }
+    if(flag==0){
+        printf("wrong Pasword\n");
+        login(phone);
     }
 }
 void login(long long int phone)
